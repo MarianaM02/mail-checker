@@ -46,29 +46,7 @@ public class MailLogControllerImpl implements MailLogController {
 	
 	@GetMapping("/mail/validate/{mailAddress}")
 	public String checkMail(@PathVariable String mailAddress) {
-		// Regular Expression by RFC 5322 for Email Validation
-		boolean esValido = false;
-		
-		String regexPattern = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
-		
-		boolean esRFC5322Valido = Pattern.compile(regexPattern).matcher(mailAddress).matches();
-		
-		boolean tieneDominioValido = true;
-		String mailDividido[] = mailAddress.split("@");
-		String dominioDividido[] = mailDividido[1].split("\\.");
-		
-		tieneDominioValido = mailDividido.length == 2 && dominioDividido.length >= 2;
-		
-		esValido = esRFC5322Valido && tieneDominioValido;
-
-		// Creacion del registro
-		MailLog mailLog = new MailLog();
-		mailLog.setValueMail(mailAddress);
-		mailLog.setValidated(esValido);
-		mailLog.setDate(new Date());
-		addMailLog(mailLog);
-		
-		return esValido ? "Es un mail válido" : "No es un mail valido";
+		return mailLogService.checkMail(mailAddress);
 		
 	}
 

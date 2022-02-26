@@ -17,4 +17,6 @@ public interface MailLogService {
 	
 	String updateMailLog(MailLog mailLog);
 	
+	String checkMail(String mailAddress);
+	
 }

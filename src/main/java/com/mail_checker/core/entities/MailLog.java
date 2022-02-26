@@ -24,7 +24,7 @@ public class MailLog {
 	@Basic
 	String valueMail;
 	Boolean validated;
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	Date date;
 
 }
